@@ -33,10 +33,11 @@ Game (Player &pl1, Player &pl2) :
   if (p1.stacksize() > 0 || p2.stacksize() > 0) {
         throw invalid_argument("One of players has already registered");
     }
-    if(&pl1 == &pl2)
-        GameOver = true;
-    else 
-        GameOver = false;
+    GameOver = false;
+    
+    if(&pl1 == &pl2){
+       GameOver = true;
+    } 
 
  // Initialize the deck with 52 cards
         for (int suit = Card::Hearts; suit <= Card::Spades; ++suit) {
@@ -48,20 +49,20 @@ Game (Player &pl1, Player &pl2) :
         std::random_shuffle(this->cards_.begin(), this->cards_.end());
 
  // Dealing the cards to the two players
-    for (int i=0; i<cards_.size()-1  ; i+=2)
+    for (size_t i=0; i<cards_.size()-1  ; i+=2)
     {
-      Card c1 = static_cast<Card>(cards_[static_cast<size_t>(i)]);
-      Card c2 = static_cast<Card>(cards_[static_cast<size_t>(i+1)]);
+      Card card1 = static_cast<Card>(cards_[(i)]);
+      Card card2 = static_cast<Card>(cards_[(i+1)]);
       //p1.setStackValuesAt(i)
-      p1.GetStack().push_back(c1); 
-      p2.GetStack().push_back(c2);
+      p1.GetStack().push_back(card1); 
+      p2.GetStack().push_back(card2);
 
     }
-    p1.SetStacksize(p1.GetStack().size());
-    p2.SetStacksize(p2.GetStack().size());
+    p1.SetStacksize(static_cast<int> (p1.GetStack().size()));
+    p2.SetStacksize(static_cast<int> (p2.GetStack().size()));
     this->LastTurn = "";
     this->num_of_draws= 0;
-    
+        
   }  
 
 void playTurn();

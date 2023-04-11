@@ -26,7 +26,8 @@ class Card {
 
  // String representation of the card
     std::string ToString() const {
-        std::string suit_str, rank_str;
+        string suit_str;
+        string rank_str;
 
  switch (suit_) {
             case Hearts:   suit_str = "Hearts";   break;
